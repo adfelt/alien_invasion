@@ -19,6 +19,7 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
         self.ship = Ship(self)
+        self.bullets = pygame.sprite.Group()
         # Set the background color.
         self.bg_color = (230,230,230)
 
@@ -31,6 +32,8 @@ class AlienInvasion:
             self.ship.update()
             # Redraw the screen during each pass through the loop.
             self._update_screen()
+            # Redraw the screen for each bullet fired
+            self.bullets.update()
 
     def _check_events(self):
         '''Respond to keypresses and mouse events.'''
