@@ -53,7 +53,7 @@ class AlienInvasion:
                 elif event.type == pygame.KEYUP:
                     self._check_keyup_events(event)
 
-
+# Keyboard Methods
     def _check_keydown_events(self,event):
         '''Respond to keypresses'''
         if event.key == pygame.K_RIGHT:
@@ -74,7 +74,7 @@ class AlienInvasion:
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
 
-
+# Bullet Methods
     def _fire_bullet(self):
         '''Create a new bullet and add it to the bullets group.'''
         if len(self.bullets) < self.settings.bullets_allowed * 10:
@@ -89,6 +89,7 @@ class AlienInvasion:
             if bullet.rect.bottom <=0:
                 self.bullets.remove(bullet)
 
+# Alien Methods
     def _create_fleet(self):
         '''Create the fleet of aliens.'''
         # Create an alien and find the number of aliens in a row.
@@ -120,13 +121,27 @@ class AlienInvasion:
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
 
+    def _check_fleet_edges(self):
+        """Respond appropriately if any aliens have reached an edge."""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+
+    def _change_fleet_direction(self):
+        '''Drop the entire fleet and change the fleet's direction.'''
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
+
     def _update_aliens(self):
-        '''Update the positions of all aliens in the fleet.'''
+        '''Check if the fleet is at an edge,
+            then update the positions of all aliens in the fleet'''
+        self._check_fleet_edges()
         self.aliens.update()
 
 
-
-
+# Misc Methods
     def _update_screen(self):
         '''Update images on the screen, and flip to the new screen.'''
         self.screen.fill(self.settings.bg_color)
