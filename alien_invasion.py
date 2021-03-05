@@ -39,6 +39,8 @@ class AlienInvasion:
             self._update_screen()
             # Redraw the screen for each bullet fired
             self._update_bullets()
+            # Redraw the alien's positions
+            self._update_aliens()
 
 
     def _check_events(self):
@@ -117,6 +119,10 @@ class AlienInvasion:
         alien.rect.x = alien.x
         alien.rect.y = alien.rect.height + 2 * alien.rect.height * row_number
         self.aliens.add(alien)
+
+    def _update_aliens(self):
+        '''Update the positions of all aliens in the fleet.'''
+        self.aliens.update()
 
 
 
