@@ -177,6 +177,19 @@ class AlienInvasion:
         # Draw the alien to the screen
         self.aliens.draw(self.screen)
 
+# Ship Methods
+    def _ship_hit(self):
+        '''Respond to the ship being hit by an alien.'''
+        # Decrement ships_left.
+        self.stats.ships_left -= 1
+
+        # Get rid of any remaining alienns and bullets.
+        self.aliens.empty()
+        self.bullets.empty()
+
+        #Pause
+        sleep(0.5)
+
 
         # Make the most recently drawn screen visible.
         pygame.display.flip()
