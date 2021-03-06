@@ -163,7 +163,7 @@ class AlienInvasion:
 
         # Look for alien-ship collisions.
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
 
 
 # Misc Methods
@@ -189,6 +189,11 @@ class AlienInvasion:
 
         #Pause
         sleep(0.5)
+
+    def center_ship(self):
+        '''Center the ship on the screen.'''
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
 
 
         # Make the most recently drawn screen visible.
