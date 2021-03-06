@@ -177,7 +177,10 @@ class AlienInvasion:
         # Draw the alien to the screen
         self.aliens.draw(self.screen)
 
-# Ship Methods
+        # Make the most recently drawn screen visible.
+        pygame.display.flip()
+
+    # Ship Methods
     def _ship_hit(self):
         '''Respond to the ship being hit by an alien.'''
         # Decrement ships_left.
@@ -189,15 +192,6 @@ class AlienInvasion:
 
         #Pause
         sleep(0.5)
-
-    def center_ship(self):
-        '''Center the ship on the screen.'''
-        self.rect.midbottom = self.screen_rect.midbottom
-        self.x = float(self.rect.x)
-
-
-        # Make the most recently drawn screen visible.
-        pygame.display.flip()
 
 
 if __name__ =='__main__':
